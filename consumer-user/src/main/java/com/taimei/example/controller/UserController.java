@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 public class UserController {
 
@@ -21,10 +25,25 @@ public class UserController {
         return feignClient.getMovie(id);
     }
 
+    @GetMapping("/movies")
+    public List<Movie> getMovies(Movie movie) {
+
+        System.out.println("请求接收到了****");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("status", "0");
+        return feignClient.getMovies(map);
+    }
+
     @PostMapping("/movie/{id}")
     public Long refundTicket(@PathVariable Long id) {
 
         System.out.println("退票请求接收******");
         return feignClient.reduceTicket(id);
+    }
+
+    @PostMapping("/movie1")
+    public String refundTicket(Movie movie) {
+        System.out.println(movie.toString());
+        return feignClient.postMovie(movie);
     }
 }

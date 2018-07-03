@@ -75,4 +75,16 @@ public class Movie {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", status='" + status + '\'' +
+                ", movieCode='" + movieCode + '\'' +
+                ", ticketCount=" + ticketCount +
+                '}';
+    }
 }

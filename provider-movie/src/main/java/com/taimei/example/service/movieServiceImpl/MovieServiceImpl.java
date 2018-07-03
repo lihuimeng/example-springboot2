@@ -6,6 +6,8 @@ import com.taimei.example.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieServiceImpl implements MovieService {
 
@@ -30,4 +32,10 @@ public class MovieServiceImpl implements MovieService {
     public Long addMovie(Movie movie) {
         return movieDao.insert(movie);
     }
+
+    @Override
+    public List<Movie> getMovieList(Movie movie) {
+        return movieDao.findMovies(movie);
+    }
+
 }

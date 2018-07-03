@@ -3,10 +3,9 @@ package com.taimei.example.controller;
 import com.taimei.example.entry.Movie;
 import com.taimei.example.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class MovieController {
@@ -20,14 +19,21 @@ public class MovieController {
         return movieService.findById(id);
     }
 
+    @GetMapping("/movies")
+    public List<Movie> findMovieById(Movie movie) {
+        System.out.println("远程调用请求******");
+        return movieService.getMovieList(movie);
+    }
+
     @PostMapping("/movie/{id}")
     public Long reduceMovieCount(@PathVariable Long id) {
         return movieService.reduceCount(id);
     }
 
     @PostMapping("/movie")
-    public Long addMovie(Movie movie) {
-        System.out.println("插入操作测试******");
-        return movieService.addMovie(movie);
+    public Movie postMovie(@RequestBody Movie movie) {
+        System.out.println("Post多个参数操作测试******");
+
+        return movie;
     }
 }
